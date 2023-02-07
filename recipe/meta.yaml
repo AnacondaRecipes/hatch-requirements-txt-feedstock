@@ -10,34 +10,40 @@ source:
   sha256: bb87ecee32e4ac05d09854ac3c279dd526fbd655154acd9cd10c2a4768a83669
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<36]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
   number: 0
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
-    - hatchling >=0.21.0
+    - hatchling
+    - wheel
   run:
-    - python >=3.6
+    - python
     - hatchling >=0.21.0
     - packaging >=21.3
 
 test:
   imports:
     - hatch_requirements_txt
-  commands:
-    - pip check
   requires:
     - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/repo-helper/hatch-requirements-txt
   summary: Hatchling plugin to read project dependencies from requirements.txt
   license: MIT
+  license_family: MIT
   license_file:
     - LICENSE
+  description: |
+    This is a plugin for Hatchling that reads the project dependencies from a requirements.txt file.
+  dev_url: https://github.com/repo-helper/hatch-requirements-txt
+  doc_url: https://github.com/repo-helper/hatch-requirements-txt
 
 extra:
   recipe-maintainers:
