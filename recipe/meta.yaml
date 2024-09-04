@@ -1,5 +1,5 @@
 {% set name = "hatch-requirements-txt" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/hatch_requirements_txt-{{ version }}.tar.gz
-  sha256: bb87ecee32e4ac05d09854ac3c279dd526fbd655154acd9cd10c2a4768a83669
+  sha256: 2c686e5758fd05bb55fa7d0c198fdd481f8d3aaa3c693260f5c0d74ce3547d20
 
 build:
+  # Technically we should be [py<361] for 0.4.1 but conda doesn't
+  # recognise 361 and skips all pythons...
   skip: True  # [py<36]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
