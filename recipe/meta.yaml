@@ -18,14 +18,17 @@ build:
 
 requirements:
   host:
-    - python
+    - python >=3.6.1  # see skip, above
     - pip
     - hatchling
     - wheel
   run:
-    - python
+    - python >=3.6.1  # see skip, above
     - hatchling >=0.21.0
     - packaging >=21.3
+
+# No upstream tests (in GH repo) as we are missing coincidence,
+# coverage-pyver-pragma, dist-meta, domdf-python-tools.
 
 test:
   imports:
